@@ -2,19 +2,22 @@ function Button(
     {
     type,
     text,
-    onclick,
-    disabled
+    onClick,
+    disabled,
+    buttonType="button"
     }
     
     
 ){
     return (
         <button
-            onclick={onclick}
+            onClick={onClick}
             disabled={disabled}
             className={`${baseClasses} ${typeClasses[type]}`}
+            type={buttonType}
         >
             {text}
+        
         </button>
     )
 }

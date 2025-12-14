@@ -1,11 +1,14 @@
-import { useEffect, useState } from 'react'
+import { use, useEffect, useState } from 'react'
 // import HelloWorldTailwind from './components/HelloWorldTailwind'
 import ProductList from './components/ProductList'
 import {productService} from './services/productService'
+import Button from './components/Button'
+import  ProductForm  from './components/ProductForm'
 
 function App() {
 
   const [products,setProducts]=useState([])
+  const [showForm,setShowForm]=useState(false)
 
   useEffect(()=>{
     loadProducts()
@@ -31,12 +34,31 @@ function App() {
   }
 
 
-  return <><ProductList products={products}/>
-  
-  </>
+  return (
+  <>
+    {!showForm && (
+      <Button
+        type="primary"
+        text="New Product"
+        onClick={() => setShowForm(true)}
+        disabled={false}
+        
+      />
+    )}
 
+    {showForm && (
+      <ProductForm
+        onSubmit={()=> setShowForm(false)}
+        onCancel={()=> setShowForm(false)}
+      />
+    )}
+
+    <ProductList products={products} />
+  </>
+);
 
 
 }
 
 export default App
+
